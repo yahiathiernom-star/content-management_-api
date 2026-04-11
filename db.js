@@ -17,7 +17,8 @@ db.exec(`
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     content TEXT,
-    author_id INTEGER
+    author_id INTEGER,
+    FOREIGN KEY (author_id) REFERENCES authors(id)
   )
 `)
 
