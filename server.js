@@ -1,50 +1,24 @@
-import express from "express";
-import db from "./db.js";
+import express from "express"
+import db from "./db.js"
+import articlesRoutes from "./routes/articles.routes.js"
+import authorsRoutes from "./routes/authors.routes.js"
 
-const app = express();
+const app = express()
 
-app.use(express.json());
+// lire le JSON
+app.use(express.json())
 
-/*
-GET /authors
-*/
-app.get("/authors", (req, res) => {
-  try {
-    const rows = db.prepare("SELECT * FROM authors").all();
-    res.json(rows);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Erreur DB" });
-  }
-});
 
-/*
-POST /authors
-*/
-app.post("/authors", (req, res) => {
-  const { name } = req.body;
+// ---------------- AUTHORS ----------------
+// connecter les routes autheurs
+app.use("/authors", authorsRoutes)
 
-  if (!name || name.trim() === "") {
-    return res.status(400).json({
-      message: "Le champ name est obligatoire"
-    });
-  }
+// ---------------- ARTICLES ----------------
 
-  try {
-    const result = db
-      .prepare("INSERT INTO authors (name) VALUES (?)")
-      .run(name);
+// connecter les routes articles
+app.use("/articles", articlesRoutes)
 
-    res.status(201).json({
-      id: result.lastInsertRowid,
-      name
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Erreur DB" });
-  }
-});
-
+// lancer le serveur
 app.listen(3000, () => {
-  console.log("Serveur lancé sur le port 3000");
-});
+  console.log("Serveur lancé sur le port 3000")
+})

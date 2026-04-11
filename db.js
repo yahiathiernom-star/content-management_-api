@@ -1,14 +1,24 @@
-import Database from "better-sqlite3";
+import Database from "better-sqlite3"
 
-const db = new Database("./database.db");
+// connexion à la base
+const db = new Database("./database.db")
 
-console.log("Connecté à SQLite");
-
+// table authors
 db.exec(`
   CREATE TABLE IF NOT EXISTS authors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT
   )
-`);
+`)
 
-export default db;
+// table articles
+db.exec(`
+  CREATE TABLE IF NOT EXISTS articles (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    content TEXT,
+    author_id INTEGER
+  )
+`)
+
+export default db
