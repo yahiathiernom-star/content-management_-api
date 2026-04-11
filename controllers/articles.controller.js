@@ -16,7 +16,7 @@ const getAllArticles = (req, res) => {
   }
 }
 
-// récupérer un article
+// récupérer un article,
 const getArticleById = (req, res) => {
   const id = parseInt(req.params.id)
 
