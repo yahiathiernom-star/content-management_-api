@@ -1,9 +1,8 @@
 import Database from "better-sqlite3"
 
-// connexion à la base
 const db = new Database("./database.db")
 
-// table authors
+// table auteurs
 db.exec(`
   CREATE TABLE IF NOT EXISTS authors (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

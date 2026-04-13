@@ -1,12 +1,16 @@
 import express from "express"
-import { getAllAuthors, createAuthor } from "../controllers/authors.controller.js"
+import {
+  getAllAuthors,
+  getAuthorById,
+  createAuthor,
+  getArticlesByAuthor
+} from "../controllers/authors.controller.js"
 
 const router = express.Router()
 
-// récupérer tous les auteurs
 router.get("/", getAllAuthors)
-
-// créer un auteur
 router.post("/", createAuthor)
+router.get("/:id", getAuthorById)          // 👈 ajouté
+router.get("/:id/articles", getArticlesByAuthor)
 
 export default router
